@@ -1,28 +1,123 @@
-# api_final
-api final yatube
-# Описание.
-Данный проект представляет из себя API учебного проекта по социальной сети Yatube, в которой различные пользатели могут размещать свои публикации. API позволяет делать запросы к данным моделей Comment, Follow, Group и Post. Для реализации проекта использованы вьюсеты, для реализации механизма авторизации использованый JWT-токены.
-# Как установить?
-1. Клонируйте репозиторий:<br/>
-> $ git clone git@github.com:mnavicki20/api_final_yatube.git<br/>
-> $ cd api_final_yatube<br/>
-2. Создайте и активируйте виртуальное окружение.<br/>
-> $ python -m venv venv<br/>
-> $ source venv/Scripts/activate<br/>
-3. Установите требуемые зависимости:<br/>
-> (venv) $ pip install -r requirements.txt<br/>
-4. Выполните миграции:<br/>
-> (venv) $ cd yatube_api<br/>
-> (venv) $ python manage.py migrate<br/>
-5. Локально запустите сервер:<br/>
-> (venv) $ python manage.py runserver<br/>
+# **api_final_yatube**
+
+### _API для социальной сети Yatube_
+
+# Описание
+
+Проект представляет собой API для социальной сети Yatube. 
+Пользователь может зарегестрироваться в Yatube, получить свой JWT-токен для аутентификации и постить публикации. 
+_Токен дается всего на одну неделю, поэтому его необходимо периодически обновлять_.
+Помимо этого, пользователю предоставляется возможность прикреплять _изображения_ к постам, а также можно добавлять свои посты в различные _группы_. Например, пользователь-кулинар может запостить рецепт приготовления пюрешки с котлеткой, дополнить фотографией ингредиентов и добавить пост в группу "Кулинарные мастера".
+В Yatube также есть возможность _подписываться_ на других пользователей и _комментировать_ посты.
+
+# Технологии
+
+- [Python 3.8.8](https://www.python.org/downloads/release/python-388/)
+- [Django 2.2.16](https://www.djangoproject.com/)
+- [Django Rest Framework 3.12.4](https://www.django-rest-framework.org/)
+
+# Установка
+
+Клонируйте репозиторий и перейдите в него в командной строке:
+```sh
+git clone https://github.com/nickolaEO/api_final_yatube.git
+```
+```sh
+cd api_final_yatube
+```
+Создайте и активируйте виртуальное окружение:
+```sh
+python -m venv venv
+```
+```sh
+source venv/Scripts/activate
+```
+Установите зависимости из файла _requirements.txt_:
+```sh
+python -m pip install --upgrade pip
+```
+```sh
+pip install -r requirements.txt
+```
+Выполните миграции:
+```sh
+python manage.py migrate
+```
+Запустите проект:
+```sh
+python manage.py runserver
+```
+
 # Примеры запросов
-GET http://127.0.0.1:8000/api/v1/posts/<br/>
-<br/>
-POST http://127.0.0.1:8000/api/v1/posts/<br/>
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ0MTc3MTkxLCJqdGkiOiI3YWU1YzA5ZDk2ZWI0ZmFhYWI4MzNmODA4MWIyYjYyNCIsInVzZXJfaWQiOjJ9.lUcpMOkpdVQxVOCcAARpq3cuUZTLHHTqqv9PnfQlWHw<br/>
-Content-Type: application/json<br/>
-<br/>
-{<br/>
-    "text": "Шестая публикация для набивки базы данных"<br/>
-}<br/>
+
+**GET**: http://127.0.0.1:8000/api/v1/posts/
+Пример ответа:
+```json
+{
+    "id": 0,
+    "author": "string",
+    "text": "string",
+    "pub_date": "2021-10-14T20:41:29.648Z",
+    "image": "string",
+    "group": 0
+}
+```
+
+**POST**: http://127.0.0.1:8000/api/v1/posts/
+Тело запроса:
+```json
+{
+    "text": "string",
+    "image": "string",
+    "group": 0
+}
+```
+Пример ответа:
+```json
+{
+    "id": 0,
+    "author": "string",
+    "text": "string",
+    "pub_date": "2019-08-24T14:15:22Z",
+    "image": "string",
+    "group": 0
+}
+```
+
+**GET**: http://127.0.0.1:8000/api/v1/posts/0/comments/
+Пример ответа:
+```json
+[
+    {
+        "id": 0,
+        "author": "string",
+        "text": "string",
+        "created": "2019-08-24T14:15:22Z",
+        "post": 0
+    }
+]
+```
+
+**POST**: http://127.0.0.1:8000/api/v1/posts/0/comments/
+Тело запроса:
+```json
+{
+    "text": "string"
+}
+```
+Пример ответа:
+```json
+{
+    "id": 0,
+    "author": "string",
+    "text": "string",
+    "created": "2019-08-24T14:15:22Z",
+    "post": 0
+}
+```
+
+## License
+
+MIT
+
+**Free Software**
