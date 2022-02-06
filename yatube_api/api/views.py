@@ -5,7 +5,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from .permissions import IsAuthorOrReadOnlyPermission, ReadOnly
 from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer,
                           PostSerializer, UserSerializer)
-from posts.models import Follow, Group, Post, User
+from posts.models import Group, Post, User
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
