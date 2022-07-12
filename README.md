@@ -1,4 +1,4 @@
-# **api_final_yatube**
+# **Yatube API**
 
 ### _API для социальной сети Yatube_
 
